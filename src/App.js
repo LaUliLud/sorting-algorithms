@@ -1,7 +1,7 @@
 import React from "react";
 import Menu from "./components/layout/Menu";
 import Header from "./components/layout/Header";
-import Animations from "./components/Animations";
+import SortingAnimations from "./components/SortingAnimations";
 
 import "./App.css";
 
@@ -11,7 +11,7 @@ class App extends React.Component {
       <div className="App">
         <Menu />
         <Header />
-        <Animations />
+        <SortingAnimations />
       </div>
     );
   }
