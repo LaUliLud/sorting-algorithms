@@ -55,15 +55,16 @@ class SortingAnimations extends React.Component {
       79,
       89
     ],
-    sortingRun: 0
+    sortingRun: [0, 0]
   };
 
   chartRef = React.createRef();
   chart = null;
+  interval = null;
 
   componentDidMount() {
     this.CreateChart();
-    setInterval(() => this.SortData(), 500);
+    this.interval = setInterval(() => this.SortData(), 10);
   }
 
   CreateChart() {
@@ -83,6 +84,9 @@ class SortingAnimations extends React.Component {
       },
       options: {
         //Customize chart options
+        animation: {
+          duration: 0
+        },
         legend: { display: false },
         title: { display: false },
         scales: {
@@ -101,23 +105,28 @@ class SortingAnimations extends React.Component {
   SortData() {
     let numbers = this.state.data;
     let run = this.state.sortingRun;
-    if (run < numbers.length - 1) {
-      for (let i = 0; i < numbers.length - run - 1; i++) {
-        if (numbers[i] < numbers[i + 1]) {
-          let temp = numbers[i];
-          numbers[i] = numbers[i + 1];
-          numbers[i + 1] = temp;
+    if (run[0] < numbers.length - 1) {
+      if (run[1] < numbers.length - run[0] - 1) {
+        if (numbers[run[1]] < numbers[run[1] + 1]) {
+          let temp = numbers[run[1]];
+          numbers[run[1]] = numbers[run[1] + 1];
+          numbers[run[1] + 1] = temp;
         }
+        run[1]++;
+      } else {
+        run[1] = 0;
+        run[0]++;
       }
-      run++;
-      this.setState({
-        data: numbers,
-        sortingRun: run
-      });
-      this.chart.data.labels = this.state.data;
-      this.chart.data.datasets[0].data = this.state.data;
-      this.chart.update();
+    } else {
+      clearInterval(this.interval);
     }
+    this.setState({
+      data: numbers,
+      sortingRun: run
+    });
+    this.chart.data.labels = this.state.data;
+    this.chart.data.datasets[0].data = this.state.data;
+    this.chart.update();
   }
 
   render() {
