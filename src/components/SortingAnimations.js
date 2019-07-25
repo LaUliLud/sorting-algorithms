@@ -1,6 +1,67 @@
 import React from "react";
 import Chart from "chart.js";
 
+function BubbleSort(props) {
+  let numbers = props.data;
+  let curRun = props.sortingState;
+  let ended = false;
+  if (curRun[0] < numbers.length - 1) {
+    // does not belong here
+    if (curRun[1] < numbers.length - curRun[0] - 1) {
+      if (numbers[curRun[1]] < numbers[curRun[1] + 1]) {
+        let temp = numbers[curRun[1]];
+        numbers[curRun[1]] = numbers[curRun[1] + 1];
+        numbers[curRun[1] + 1] = temp;
+      }
+      curRun[1]++;
+    } else {
+      curRun[1] = 0;
+      curRun[0]++;
+    }
+  } else {
+    ended = true;
+  }
+  var newState = {
+    data: numbers,
+    sortingState: curRun,
+    ended: ended
+  };
+  return newState;
+}
+
+/*
+Läuft noch nicht ganz korrekt bei mehreren Zahlen wie z.B. 29 überschreibt er eine Zahl mit der nächstgrößeren
+Fehler währe mit debuggen leichter nachzuvollziehen
+Erst weiter Implementieren: Button: Go, Step
+*/
+function InsertionSort(props) {
+  let numbers = props.data;
+  let curRun = props.sortingState;
+  let ended = false;
+  if (curRun[0] === 1 && curRun[1] === 1) {
+    curRun[2] = numbers[0];
+  }
+  if (curRun[0] < numbers.length) {
+    if (curRun[1] > 0 && numbers[curRun[1] - 1] > curRun[2]) {
+      numbers[curRun[1]] = numbers[curRun[1] - 1];
+      curRun[1]--;
+    } else {
+      numbers[curRun[1]] = curRun[2];
+      curRun[0]++;
+      curRun[1] = curRun[0];
+      curRun[2] = numbers[curRun[0]];
+    }
+  } else {
+    ended = true;
+  }
+  var newState = {
+    data: numbers,
+    sortingState: curRun,
+    ended: ended
+  };
+  return newState;
+}
+
 class SortingAnimations extends React.Component {
   state = {
     data: [
@@ -55,12 +116,14 @@ class SortingAnimations extends React.Component {
       79,
       89
     ],
-    sortingRun: [0, 0]
+    sortingState: [1, 1, 0], //[0, 0], BubbleSort
+    ended: false
   };
 
-  chartRef = React.createRef();
-  chart = null;
-  interval = null;
+  constructor(props) {
+    super(props);
+    this.chartRef = React.createRef();
+  }
 
   componentDidMount() {
     this.CreateChart();
@@ -102,31 +165,23 @@ class SortingAnimations extends React.Component {
     });
   }
 
-  SortData() {
-    let numbers = this.state.data;
-    let run = this.state.sortingRun;
-    if (run[0] < numbers.length - 1) {
-      if (run[1] < numbers.length - run[0] - 1) {
-        if (numbers[run[1]] < numbers[run[1] + 1]) {
-          let temp = numbers[run[1]];
-          numbers[run[1]] = numbers[run[1] + 1];
-          numbers[run[1] + 1] = temp;
-        }
-        run[1]++;
-      } else {
-        run[1] = 0;
-        run[0]++;
-      }
-    } else {
-      clearInterval(this.interval);
-    }
-    this.setState({
-      data: numbers,
-      sortingRun: run
-    });
+  componentDidUpdate() {
     this.chart.data.labels = this.state.data;
     this.chart.data.datasets[0].data = this.state.data;
     this.chart.update();
+  }
+
+  SortData() {
+    if (this.state.ended) {
+      clearInterval(this.interval);
+    } else {
+      let newSt = InsertionSort(this.state);
+      this.setState({
+        data: newSt.data,
+        sortingState: newSt.sortingState,
+        ended: newSt.ended
+      });
+    }
   }
 
   render() {
@@ -139,3 +194,20 @@ class SortingAnimations extends React.Component {
 }
 
 export default SortingAnimations;
+
+/*
+LiveServer
+Live Sass Compiler
+html and css support (Klass im CSS werden automatisch im HTML File vorgeschlagen)
+auto rename tag (auto rename anding tag with beginning tag in html files)
+Prettier
+Java Script ES6 code snippets
+Turbo Console log (hepls for dugging (LOGGER))
+indent-rainbow (color for indents)
+Bracket Pair Colorizer
+Code Spell Checker (Tells you if a variable isn't known)
+REST Client
+Git Lens (Git repository durchstöbern, zeigt für jede Codezeile an wer sie bearbeitet und aktualisiert hat)
+Auto-Open Markdown Preview (Git Hub read me)
+ES7 React/Redux/GraphQL/React-Native snippets
+*/
