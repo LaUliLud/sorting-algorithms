@@ -1,34 +1,39 @@
 import React from "react";
 import SortingAnimation from "../SortingAnimation";
 
-class BubbleSort extends React.Component {
+class InsertionSort extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [...this.props.sortingData],
-      sortingState: [0, 0],
+      sortingState: [1, 1, 0],
       ended: false
     };
 
     this.sort = this.sort.bind(this);
   }
 
+  /*
+Läuft noch nicht ganz korrekt bei mehreren Zahlen wie z.B. 29 überschreibt er eine Zahl mit der nächstgrößeren
+Fehler währe mit debuggen leichter nachzuvollziehen
+Erst weiter Implementieren: Button: Go, Step
+*/
   sort() {
     let numbers = this.state.data;
     let curRun = this.state.sortingState;
     let ended = false;
-    if (curRun[0] < numbers.length - 1) {
-      // does not belong here
-      if (curRun[1] < numbers.length - curRun[0] - 1) {
-        if (numbers[curRun[1]] < numbers[curRun[1] + 1]) {
-          let temp = numbers[curRun[1]];
-          numbers[curRun[1]] = numbers[curRun[1] + 1];
-          numbers[curRun[1] + 1] = temp;
-        }
-        curRun[1]++;
+    if (curRun[0] === 1 && curRun[1] === 1) {
+      curRun[2] = numbers[0];
+    }
+    if (curRun[0] < numbers.length) {
+      if (curRun[1] > 0 && numbers[curRun[1] - 1] > curRun[2]) {
+        numbers[curRun[1]] = numbers[curRun[1] - 1];
+        curRun[1]--;
       } else {
-        curRun[1] = 0;
+        numbers[curRun[1]] = curRun[2];
         curRun[0]++;
+        curRun[1] = curRun[0];
+        curRun[2] = numbers[curRun[0]];
       }
     } else {
       ended = true;
@@ -42,7 +47,7 @@ class BubbleSort extends React.Component {
 
   render() {
     return (
-      <div className="sortings">
+      <div>
         <SortingAnimation
           data={this.state.data}
           ended={this.state.ended}
@@ -53,4 +58,4 @@ class BubbleSort extends React.Component {
   }
 }
 
-export default BubbleSort;
+export default InsertionSort;
