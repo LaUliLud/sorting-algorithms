@@ -4,6 +4,7 @@ import Header from "./components/layout/Header";
 import SortingPickList from "./components/SortingPickList";
 import BubbleSort from "./components/sorter/BubbleSort";
 import InsertionSort from "./components/sorter/InsertionSort";
+import DataInput from "./components/DataInput";
 
 import "./App.css";
 
@@ -11,58 +12,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sortingData: [
-        31,
-        29,
-        18,
-        49,
-        72,
-        29,
-        19,
-        6,
-        82,
-        34,
-        55,
-        86,
-        33,
-        26,
-        29,
-        36,
-        21,
-        78,
-        98,
-        37,
-        40,
-        93,
-        15,
-        40,
-        35,
-        95,
-        11,
-        57,
-        64,
-        41,
-        26,
-        51,
-        95,
-        35,
-        26,
-        3,
-        54,
-        85,
-        37,
-        7,
-        39,
-        79,
-        35,
-        25,
-        25,
-        29,
-        11,
-        100,
-        79,
-        89
-      ],
+      sortingData: [],
       sorter: [
         {
           name: "Bubble Sort",
@@ -76,6 +26,7 @@ class App extends React.Component {
     };
     this.toggleSorterActive = this.toggleSorterActive.bind(this);
     this.setSortingData = this.setSortingData.bind(this);
+    this.generateData = this.generateData.bind(this);
   }
 
   toggleSorterActive(sorter) {
@@ -90,6 +41,17 @@ class App extends React.Component {
   }
 
   setSortingData(data) {
+    let fData = data.replace(/[^0-9,]/g, "");
+    this.setState({
+      sortingData: fData.split(/[,]+/)
+    });
+  }
+
+  generateData() {
+    let data = [];
+    for (let i = 0; i < 50; i++) {
+      data.push(Math.floor(Math.random() * 100));
+    }
     this.setState({
       sortingData: data
     });
@@ -115,6 +77,11 @@ class App extends React.Component {
       <div className="App">
         <Menu />
         <Header />
+        <DataInput
+          sortingData={this.state.sortingData}
+          generateData={this.generateData}
+          setSortingData={this.setSortingData}
+        />
         <SortingPickList
           toggleSorterActive={this.toggleSorterActive}
           sortings={this.state.sorter.map(s => s.name)}
