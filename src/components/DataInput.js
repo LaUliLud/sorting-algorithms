@@ -22,20 +22,22 @@ class DataInput extends React.Component {
 
   render() {
     return (
-      <InputGroup>
-        <FormControl
-          placeholder="Comma separated data"
-          aria-label="Comma separated data"
-          aria-describedby="Sorting data"
-          value={this.props.sortingData}
-          onChange={this.handleChange}
-        />
-        <InputGroup.Append>
-          <Button variant="outline-secondary" onClick={this.randomClick}>
-            Random
-          </Button>
-        </InputGroup.Append>
-      </InputGroup>
+      <section id="data-input">
+        <InputGroup>
+          <FormControl
+            placeholder="Comma separated data"
+            aria-label="Comma separated data"
+            aria-describedby="Sorting data"
+            value={this.props.sortingData}
+            onChange={this.handleChange}
+          />
+          <InputGroup.Append>
+            <Button variant="outline-secondary" onClick={this.randomClick}>
+              Random
+            </Button>
+          </InputGroup.Append>
+        </InputGroup>
+      </section>
     );
   }
 }

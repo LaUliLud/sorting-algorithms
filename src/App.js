@@ -63,10 +63,20 @@ class App extends React.Component {
       if (this.state.sorter[i].active) {
         switch (this.state.sorter[i].name) {
           case "Bubble Sort":
-            st.push(<BubbleSort sortingData={this.state.sortingData} />);
+            st.push(
+              <BubbleSort
+                key="BubbleSort"
+                sortingData={this.state.sortingData}
+              />
+            );
             break;
           case "Insertion Sort":
-            st.push(<InsertionSort sortingData={this.state.sortingData} />);
+            st.push(
+              <InsertionSort
+                key="InsertionSort"
+                sortingData={this.state.sortingData}
+              />
+            );
             break;
           default:
             break;
@@ -86,7 +96,7 @@ class App extends React.Component {
           toggleSorterActive={this.toggleSorterActive}
           sortings={this.state.sorter.map(s => s.name)}
         />
-        <section className="page_section">{st}</section>
+        <section id="sortings">{st}</section>
       </div>
     );
   }

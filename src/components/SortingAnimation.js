@@ -61,6 +61,10 @@ class SortingAnimation extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   render() {
     return <canvas id="myChart" ref={this.chartRef} />;
   }

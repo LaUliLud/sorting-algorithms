@@ -14,7 +14,7 @@ class SortingPickList extends React.Component {
 
   render() {
     return (
-      <section className="page_section">
+      <section id="sorting-pick-list">
         <Form onSubmit={this.handleSubmit}>
           {this.props.sortings.map(name => (
             <div key={`check-box-${name}`} className="mb-3">

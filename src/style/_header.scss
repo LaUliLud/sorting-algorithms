@@ -1,0 +1,26 @@
+#header {
+  height: 40vh;
+  background: url(../img/code.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  z-index: auto;
+
+  .overlay {
+    position: absolute;
+    width: 100%;
+    height: 40vh;
+    background: rgba($primary-color, 0.8);
+  }
+
+  .head {
+    text-transform: uppercase;
+    text-align: left;
+    margin-left: 10rem;
+    margin-top: 10vh;
+    color: $secondary-color;
+
+    h1 {
+      font-weight: bolder;
+    }
+  }
+}
