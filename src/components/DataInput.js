@@ -11,8 +11,8 @@ class DataInput extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  randomClick(event) {
-    event.preventDefault(event);
+  randomClick(e) {
+    e.preventDefault();
     this.props.generateData();
   }
 
@@ -23,7 +23,8 @@ class DataInput extends React.Component {
   render() {
     return (
       <section id="data-input">
-        <InputGroup>
+        <h4 className="heading">Sorting values:</h4>
+        <InputGroup className="sorting-data-input">
           <FormControl
             placeholder="Comma separated data"
             aria-label="Comma separated data"

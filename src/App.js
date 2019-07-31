@@ -2,11 +2,10 @@ import React from "react";
 import Menu from "./components/layout/Menu";
 import Header from "./components/layout/Header";
 import SortingPickList from "./components/SortingPickList";
-import BubbleSort from "./components/sorter/BubbleSort";
-import InsertionSort from "./components/sorter/InsertionSort";
 import DataInput from "./components/DataInput";
 
 import "./App.css";
+import Sortings from "./components/Sortings";
 
 class App extends React.Component {
   constructor(props) {
@@ -58,31 +57,6 @@ class App extends React.Component {
   }
 
   render() {
-    let st = [];
-    for (let i = 0; i < this.state.sorter.length; i++) {
-      if (this.state.sorter[i].active) {
-        switch (this.state.sorter[i].name) {
-          case "Bubble Sort":
-            st.push(
-              <BubbleSort
-                key="BubbleSort"
-                sortingData={this.state.sortingData}
-              />
-            );
-            break;
-          case "Insertion Sort":
-            st.push(
-              <InsertionSort
-                key="InsertionSort"
-                sortingData={this.state.sortingData}
-              />
-            );
-            break;
-          default:
-            break;
-        }
-      }
-    }
     return (
       <div className="App">
         <Menu />
@@ -96,7 +70,10 @@ class App extends React.Component {
           toggleSorterActive={this.toggleSorterActive}
           sortings={this.state.sorter.map(s => s.name)}
         />
-        <section id="sortings">{st}</section>
+        <Sortings
+          sorter={this.state.sorter}
+          sortingData={this.state.sortingData}
+        />
       </div>
     );
   }

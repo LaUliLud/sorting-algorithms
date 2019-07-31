@@ -9,7 +9,6 @@ class SortingAnimation extends React.Component {
 
   componentDidMount() {
     this.CreateChart();
-    this.interval = setInterval(() => this.SortData(), 10);
   }
 
   CreateChart() {
@@ -48,9 +47,23 @@ class SortingAnimation extends React.Component {
   }
 
   componentDidUpdate() {
-    this.chart.data.labels = this.props.data;
-    this.chart.data.datasets[0].data = this.props.data;
-    this.chart.update();
+    if (this.props.action === "run") {
+      if (this.interval) {
+        clearInterval(this.interval);
+      }
+      this.interval = setInterval(() => this.SortData(), 10);
+      this.props.setAction("running");
+    } else if (this.props.action === "pause") {
+      clearInterval(this.interval);
+    } else if (this.props.action === "step") {
+      clearInterval(this.interval);
+      this.SortData();
+      this.props.setAction("running");
+    } else if (this.props.action === "running") {
+      this.chart.data.labels = this.props.data;
+      this.chart.data.datasets[0].data = this.props.data;
+      this.chart.update();
+    }
   }
 
   SortData() {

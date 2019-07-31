@@ -52,6 +52,8 @@ Erst weiter Implementieren: Button: Go, Step
           data={this.state.data}
           ended={this.state.ended}
           sort={this.sort}
+          action={this.props.action}
+          setAction={this.props.setAction}
         />
       </div>
     );
