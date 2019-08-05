@@ -47,7 +47,7 @@ Erst weiter Implementieren: Button: Go, Step
 
   render() {
     return (
-      <div>
+      <div className="animation">
         <SortingAnimation
           data={this.state.data}
           ended={this.state.ended}

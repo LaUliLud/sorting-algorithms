@@ -1,7 +1,6 @@
 import React from "react";
 import BubbleSort from "./sorter/BubbleSort";
 import InsertionSort from "./sorter/InsertionSort";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -30,18 +29,31 @@ class Sortings extends React.Component {
     });
   }
 
+  scrollToSection() {
+    let section = document.getElementById("sortings");
+    let yCoordinate = section.getBoundingClientRect().top + window.pageYOffset;
+    let menu = document.getElementById("menu");
+    window.scrollTo({
+      top: yCoordinate - menu.clientHeight,
+      behavior: "smooth"
+    });
+  }
+
   play(e) {
     e.preventDefault();
+    this.scrollToSection();
     this.setAction("run");
   }
 
   pause(e) {
     e.preventDefault();
+    this.scrollToSection();
     this.setAction("pause");
   }
 
   step(e) {
     e.preventDefault();
+    this.scrollToSection();
     this.setAction("step");
   }
 
@@ -78,20 +90,18 @@ class Sortings extends React.Component {
 
     return (
       <section id="sortings">
-        <div className="controls">
-          <ButtonToolbar aria-label="Animation controls">
-            <Button className="mr-2" variant="success" onClick={this.play}>
-              <FontAwesomeIcon className="mr-1" icon={faPlay} /> Go
-            </Button>
-            <Button className="mr-2" variant="warning" onClick={this.pause}>
-              <FontAwesomeIcon className="mr-1" icon={faPause} />
-              Pause
-            </Button>
-            <Button variant="info" onClick={this.step}>
-              <FontAwesomeIcon className="mr-1" icon={faStepForward} />
-              Next
-            </Button>
-          </ButtonToolbar>
+        <div className="controls" aria-label="Animation controls">
+          <Button className="mr-2" variant="success" onClick={this.play}>
+            <FontAwesomeIcon className="mr-1" icon={faPlay} /> Go
+          </Button>
+          <Button className="mr-2" variant="warning" onClick={this.pause}>
+            <FontAwesomeIcon className="mr-1" icon={faPause} />
+            Pause
+          </Button>
+          <Button variant="info" onClick={this.step}>
+            <FontAwesomeIcon className="mr-1" icon={faStepForward} />
+            Next
+          </Button>
         </div>
         <div className="animations">{st}</div>
       </section>

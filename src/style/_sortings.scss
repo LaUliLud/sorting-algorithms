@@ -1,0 +1,23 @@
+#sortings {
+  padding: 1rem 0rem;
+  margin: 0;
+  height: 1000px;
+
+  .controls {
+    display: inline block;
+    margin-bottom: 1rem;
+  }
+
+  .animations {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+
+    .animation {
+      //width: 100rem;
+      flex-basis: 30rem;
+    }
+  }
+}
