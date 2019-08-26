@@ -8,6 +8,7 @@ import {
   faPause,
   faStepForward
 } from "@fortawesome/free-solid-svg-icons";
+import QuickSort from "./sorter/QuickSort";
 
 class Sortings extends React.Component {
   constructor(props) {
@@ -23,7 +24,6 @@ class Sortings extends React.Component {
   }
 
   setAction(a) {
-    console.info(a);
     this.setState({
       action: a
     });
@@ -76,6 +76,16 @@ class Sortings extends React.Component {
             st.push(
               <InsertionSort
                 key="InsertionSort"
+                sortingData={this.props.sortingData}
+                action={this.state.action}
+                setAction={this.setAction}
+              />
+            );
+            break;
+          case "Quick Sort":
+            st.push(
+              <QuickSort
+                key="QuickSort"
                 sortingData={this.props.sortingData}
                 action={this.state.action}
                 setAction={this.setAction}

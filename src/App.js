@@ -20,6 +20,10 @@ class App extends React.Component {
         {
           name: "Insertion Sort",
           active: false
+        },
+        {
+          name: "Quick Sort",
+          active: false
         }
       ]
     };
