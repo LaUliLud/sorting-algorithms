@@ -21,6 +21,7 @@ class Sortings extends React.Component {
     this.play = this.play.bind(this);
     this.pause = this.pause.bind(this);
     this.step = this.step.bind(this);
+    this.calcAnimationWidth = this.calcAnimationWidth.bind(this);
   }
 
   setAction(a) {
@@ -57,8 +58,21 @@ class Sortings extends React.Component {
     this.setAction("step");
   }
 
+  calcAnimationWidth(number) {
+    let width = 0;
+    if (number > 0) {
+      if (number > 3) {
+        number = 3;
+      }
+      let space = number * 20 + 20;
+      width = (window.innerWidth - space) / number;
+    }
+    return width;
+  }
+
   render() {
     let st = [];
+    let animations = 0;
     for (let i = 0; i < this.props.sorter.length; i++) {
       if (this.props.sorter[i].active) {
         switch (this.props.sorter[i].name) {
@@ -95,8 +109,13 @@ class Sortings extends React.Component {
           default:
             break;
         }
+        animations++;
       }
     }
+
+    const sorterWidth = {
+      width: this.calcAnimationWidth(animations)
+    };
 
     return (
       <section id="sortings">
@@ -113,7 +132,18 @@ class Sortings extends React.Component {
             Next
           </Button>
         </div>
-        <div className="animations">{st}</div>
+        <div className="animations">
+          {st.map(sorter => (
+            // hier nochmal schauen ich denke reakt erkennt nich das die anderen schon dargestellten komponenten auch wieder aktualisiert werden müssen
+            <div
+              className="animation"
+              style={sorterWidth}
+              key={`div-${sorter.key}`}
+            >
+              {sorter}
+            </div>
+          ))}
+        </div>
       </section>
     );
   }

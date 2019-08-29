@@ -8,12 +8,11 @@ class SortingAnimation extends React.Component {
   }
 
   componentDidMount() {
-    this.CreateChart();
+    this.props.setAction("created");
   }
 
   CreateChart() {
     const myChartRef = this.chartRef.current.getContext("2d");
-
     this.chart = new Chart(myChartRef, {
       type: "bar",
       data: {
@@ -47,7 +46,12 @@ class SortingAnimation extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.action === "run") {
+    if (this.props.action === "created") {
+      if (typeof this.chart !== "undefined") {
+        this.chart.destroy();
+      }
+      this.CreateChart();
+    } else if (this.props.action === "run") {
       if (this.interval) {
         clearInterval(this.interval);
       }
@@ -76,6 +80,7 @@ class SortingAnimation extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.interval);
+    this.props.setAction("created");
   }
 
   render() {

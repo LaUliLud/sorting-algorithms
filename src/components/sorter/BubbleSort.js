@@ -41,15 +41,13 @@ class BubbleSort extends React.Component {
 
   render() {
     return (
-      <div className="animation">
-        <SortingAnimation
-          data={this.state.data}
-          ended={this.state.ended}
-          sort={this.sort}
-          action={this.props.action}
-          setAction={this.props.setAction}
-        />
-      </div>
+      <SortingAnimation
+        data={this.state.data}
+        ended={this.state.ended}
+        sort={this.sort}
+        action={this.props.action}
+        setAction={this.props.setAction}
+      />
     );
   }
 }

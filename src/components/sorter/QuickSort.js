@@ -29,18 +29,15 @@ class QuickSort extends React.Component {
     let curRun = this.state.sortingState;
     let ended = this.state.ended;
     if (!ended) {
-      console.info("next iteration: " + curRun);
-      // alles was kleiner als das pivot element ist auf die linke Seite und alles was größer ist auf die rechte seite
+      // sorting run: move everything that is smaller than the pivot element to the left side and everything that is bigger to the right side
       if (curRun[0] < curRun[2]) {
-        console.info("sort");
         if (numbers[curRun[0]] <= curRun[3]) {
           numbers = this.swap(numbers, curRun[0], curRun[4]);
           curRun[4]++;
         }
         curRun[0]++;
       } else if (curRun[0] === curRun[2]) {
-        // aufbauen der neu zu sortierenden Arrays
-        console.info("build");
+        // after the sorting run has finished, initialize the new sorting arrays
         numbers = this.swap(numbers, curRun[4], curRun[2]);
         if (curRun[4] - 1 > curRun[1]) {
           stack.push([curRun[1], curRun[4] - 1]);
@@ -50,15 +47,11 @@ class QuickSort extends React.Component {
         }
         curRun[0]++;
       } else {
-        // initialisieren der parameter für sortierdurchlauf
+        // initialize the parameters for the next sorting run
         let current = stack.pop();
         if (current === undefined) {
-          console.info("ended");
           ended = true;
         } else {
-          console.info(
-            "next initial: left:" + current[0] + " , right:" + current[1]
-          );
           curRun[1] = current[0];
           curRun[2] = current[1];
           curRun[3] = numbers[curRun[2]];
@@ -77,15 +70,13 @@ class QuickSort extends React.Component {
 
   render() {
     return (
-      <div className="animation">
-        <SortingAnimation
-          data={this.state.data}
-          ended={this.state.ended}
-          sort={this.sort}
-          action={this.props.action}
-          setAction={this.props.setAction}
-        />
-      </div>
+      <SortingAnimation
+        data={this.state.data}
+        ended={this.state.ended}
+        sort={this.sort}
+        action={this.props.action}
+        setAction={this.props.setAction}
+      />
     );
   }
 }

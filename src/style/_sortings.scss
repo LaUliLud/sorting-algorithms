@@ -10,14 +10,14 @@
 
   .animations {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     justify-content: center;
-    align-items: stretch;
+    //align-content: stretch;
 
     .animation {
       //width: 100rem;
-      flex-basis: 30rem;
+      //flex-basis: 30rem;
+      //flex: 1;
     }
   }
 }
