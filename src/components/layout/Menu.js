@@ -15,7 +15,6 @@ class Menu extends React.Component {
 
   render() {
     return (
-      //2.875rem
       <div id="menu" className="fixed-top">
         <Navbar bg="dark" variant="dark" expand="lg">
           <Navbar.Brand href="#home">Sorting Algorithms</Navbar.Brand>

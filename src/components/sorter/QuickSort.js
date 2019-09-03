@@ -68,6 +68,18 @@ class QuickSort extends React.Component {
     });
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.sortingData !== prevProps.sortingData) {
+      this.setState({
+        data: [...this.props.sortingData],
+        sortingState: [0, -1, -1, 0, 0], // i for loop, stack left, stack right, pivot, pivot index
+        stack: [[0, this.props.sortingData.length - 1]],
+        ended: false
+      });
+      this.props.setAction("update");
+    }
+  }
+
   render() {
     return (
       <SortingAnimation

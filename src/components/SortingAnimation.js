@@ -67,6 +67,13 @@ class SortingAnimation extends React.Component {
       this.chart.data.labels = this.props.data;
       this.chart.data.datasets[0].data = this.props.data;
       this.chart.update();
+    } else if (this.props.action === "update") {
+      if (this.interval) {
+        clearInterval(this.interval);
+      }
+      this.chart.data.labels = this.props.data;
+      this.chart.data.datasets[0].data = this.props.data;
+      this.chart.update();
     }
   }
 

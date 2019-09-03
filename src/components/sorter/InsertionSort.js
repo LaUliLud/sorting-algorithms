@@ -39,6 +39,17 @@ class InsertionSort extends React.Component {
     });
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.sortingData !== prevProps.sortingData) {
+      this.setState({
+        data: [...this.props.sortingData],
+        sortingState: [1, 1, 0],
+        ended: false
+      });
+      this.props.setAction("update");
+    }
+  }
+
   render() {
     return (
       <SortingAnimation
