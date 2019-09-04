@@ -19,7 +19,7 @@ class BubbleSort extends React.Component {
     let ended = false;
     if (curRun[0] < numbers.length - 1) {
       if (curRun[1] < numbers.length - curRun[0] - 1) {
-        if (numbers[curRun[1]] < numbers[curRun[1] + 1]) {
+        if (numbers[curRun[1]] > numbers[curRun[1] + 1]) {
           let temp = numbers[curRun[1]];
           numbers[curRun[1]] = numbers[curRun[1] + 1];
           numbers[curRun[1] + 1] = temp;

@@ -134,7 +134,6 @@ class Sortings extends React.Component {
         </div>
         <div className="animations">
           {st.map(sorter => (
-            // hier nochmal schauen ich denke reakt erkennt nich das die anderen schon dargestellten komponenten auch wieder aktualisiert werden müssen
             <div
               className="animation"
               style={sorterWidth}

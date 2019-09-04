@@ -16,7 +16,6 @@ class SortingAnimation extends React.Component {
     this.chart = new Chart(myChartRef, {
       type: "bar",
       data: {
-        //Bring in data
         labels: this.props.data,
         datasets: [
           {
@@ -26,7 +25,6 @@ class SortingAnimation extends React.Component {
         ]
       },
       options: {
-        //Customize chart options
         animation: {
           duration: 0
         },
@@ -96,20 +94,3 @@ class SortingAnimation extends React.Component {
 }
 
 export default SortingAnimation;
-
-/*
-LiveServer
-Live Sass Compiler
-html and css support (Klass im CSS werden automatisch im HTML File vorgeschlagen)
-auto rename tag (auto rename anding tag with beginning tag in html files)
-Prettier
-Java Script ES6 code snippets
-Turbo Console log (hepls for dugging (LOGGER))
-indent-rainbow (color for indents)
-Bracket Pair Colorizer
-Code Spell Checker (Tells you if a variable isn't known)
-REST Client
-Git Lens (Git repository durchstöbern, zeigt für jede Codezeile an wer sie bearbeitet und aktualisiert hat)
-Auto-Open Markdown Preview (Git Hub read me)
-ES7 React/Redux/GraphQL/React-Native snippets
-*/

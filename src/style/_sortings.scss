@@ -12,5 +12,10 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+
+    .animation {
+      min-width: 300px;
+      max-width: 90%;
+    }
   }
 }
